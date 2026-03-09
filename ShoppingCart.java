@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.*;
 
 class Item {
     String name;
@@ -14,17 +14,14 @@ public class ShoppingCart {
 
     ArrayList<Item> cart = new ArrayList<>();
 
-    // Add item
     void addItem(String name, int price) {
         cart.add(new Item(name, price));
     }
 
-    // Remove item
     void removeItem(String name) {
         cart.removeIf(item -> item.name.equals(name));
     }
 
-    // Calculate total price
     int calculateTotal() {
         int total = 0;
         for(Item item : cart) {
@@ -35,27 +32,31 @@ public class ShoppingCart {
 
     public static void main(String[] args) {
 
-        ShoppingCart sc = new ShoppingCart();
+        Scanner sc = new Scanner(System.in);
+        ShoppingCart cart = new ShoppingCart();
 
-        // Adding 4 items
-        sc.addItem("Book",100);
-        sc.addItem("Pen",50);
-        sc.addItem("Bag",200);
-        sc.addItem("Bottle",150);
+        System.out.print("Enter number of items to add: ");
+        int add = sc.nextInt();
 
-        int addCount = 4;
+        for(int i=1;i<=add;i++){
+            System.out.print("Enter item name: ");
+            String name = sc.next();
+            System.out.print("Enter price: ");
+            int price = sc.nextInt();
+            cart.addItem(name,price);
+        }
 
-        // Removing 2 items
-        sc.removeItem("Pen");
-        sc.removeItem("Bottle");
+        System.out.print("Enter number of items to remove: ");
+        int remove = sc.nextInt();
 
-        int removeCount = 2;
+        for(int i=1;i<=remove;i++){
+            System.out.print("Enter item name to remove: ");
+            String name = sc.next();
+            cart.removeItem(name);
+        }
 
-        // Calculate total price
-        int totalPrice = sc.calculateTotal();
-
-        System.out.println("Add Items = " + addCount);
-        System.out.println("Remove Items = " + removeCount);
-        System.out.println("Total Price = " + totalPrice);
+        System.out.println("Add Items = " + add);
+        System.out.println("Remove Items = " + remove);
+        System.out.println("Total Price = " + cart.calculateTotal());
     }
 }
