@@ -2,9 +2,9 @@ import java.util.ArrayList;
 
 class Item {
     String name;
-    double price;
+    int price;
 
-    Item(String name, double price) {
+    Item(String name, int price) {
         this.name = name;
         this.price = price;
     }
@@ -12,21 +12,50 @@ class Item {
 
 public class ShoppingCart {
 
-    ArrayList<Item> items = new ArrayList<>();
+    ArrayList<Item> cart = new ArrayList<>();
 
-    public void addItem(String name, double price) {
-        items.add(new Item(name, price));
+    // Add item
+    void addItem(String name, int price) {
+        cart.add(new Item(name, price));
     }
 
-    public void removeItem(String name) {
-        items.removeIf(item -> item.name.equals(name));
+    // Remove item
+    void removeItem(String name) {
+        cart.removeIf(item -> item.name.equals(name));
     }
 
-    public double calculateTotal() {
-        double total = 0;
-        for (Item item : items) {
+    // Calculate total price
+    int calculateTotal() {
+        int total = 0;
+        for(Item item : cart) {
             total += item.price;
         }
         return total;
+    }
+
+    public static void main(String[] args) {
+
+        ShoppingCart sc = new ShoppingCart();
+
+        // Adding 4 items
+        sc.addItem("Book",100);
+        sc.addItem("Pen",50);
+        sc.addItem("Bag",200);
+        sc.addItem("Bottle",150);
+
+        int addCount = 4;
+
+        // Removing 2 items
+        sc.removeItem("Pen");
+        sc.removeItem("Bottle");
+
+        int removeCount = 2;
+
+        // Calculate total price
+        int totalPrice = sc.calculateTotal();
+
+        System.out.println("Add Items = " + addCount);
+        System.out.println("Remove Items = " + removeCount);
+        System.out.println("Total Price = " + totalPrice);
     }
 }
